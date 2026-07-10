@@ -25,6 +25,8 @@ permissions:
 jobs:
   coding-standards:
     name: Coding standards (Pint)
+    # develop pushes are auto-formatted by pint_code_style.yml; checking here races that workflow.
+    if: github.event_name != 'push' || github.ref != 'refs/heads/develop'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

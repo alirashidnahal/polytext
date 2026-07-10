@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: pint-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pint:
     runs-on: ubuntu-latest

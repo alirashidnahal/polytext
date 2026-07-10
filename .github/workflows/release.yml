@@ -43,9 +43,13 @@ jobs:
       - name: Read package version
         id: pkg
         run: |
-          VERSION=$(jq -r '.version // empty' composer.json)
-          if [ -z "$VERSION" ]; then
-            echo "::error::No \"version\" field found in composer.json"
+          if [ ! -f VERSION ]; then
+            echo "::error::VERSION file not found at repository root"
+            exit 1
+          fi
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          if ! echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'; then
+            echo "::error::VERSION must contain a valid semantic version (found: \"$VERSION\")"
             exit 1
           fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -118,4 +122,4 @@ jobs:
         if: steps.tag.outputs.exists == 'true'
         run: |
           echo "No release was created because ${{ env.RELEASE_TAG }} already exists."
-          echo "Bump the \"version\" field in composer.json to publish a new release."
+          echo "Bump the VERSION file to publish a new release."

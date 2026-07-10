@@ -1,7 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "alirashidnahal/polytext",
-    "version": "1.0.0",
     "description": "Framework-agnostic PHP library for parsing, reading, and writing text across many file formats.",
     "type": "library",
     "license": "MIT",
@@ -67,6 +66,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.3.0"
         }
     },
     "minimum-stability": "stable",
