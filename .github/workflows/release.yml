@@ -1,0 +1,121 @@
+name: Release
+
+permissions:
+  contents: write
+  actions: read
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/**'
+
+concurrency:
+  group: release-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get commit messages
+        run: |
+          COMMIT_MESSAGES=$(
+            git log --pretty=format:"- %s" \
+              $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD
+          )
+          {
+            echo "COMMIT_MESSAGES<<EOF"
+            echo "$COMMIT_MESSAGES"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: Read package version
+        id: pkg
+        run: |
+          VERSION=$(jq -r '.version // empty' composer.json)
+          if [ -z "$VERSION" ]; then
+            echo "::error::No \"version\" field found in composer.json"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "RELEASE_TAG=v${VERSION}" >> "$GITHUB_ENV"
+          echo "ARCHIVE=polytext-v${VERSION}.tar.gz" >> "$GITHUB_ENV"
+
+      - name: Check for existing release tag
+        id: tag
+        run: |
+          if git rev-parse "${{ env.RELEASE_TAG }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release tag ${{ env.RELEASE_TAG }} already exists."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Release tag ${{ env.RELEASE_TAG }} will be created."
+          fi
+
+      - name: Setup PHP
+        if: steps.tag.outputs.exists == 'false'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, fileinfo, json, mbstring, zip
+          coverage: none
+
+      - name: Validate composer.json
+        if: steps.tag.outputs.exists == 'false'
+        run: composer validate --strict
+
+      - name: Install dependencies
+        if: steps.tag.outputs.exists == 'false'
+        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+
+      - name: Prepare release message
+        if: steps.tag.outputs.exists == 'false'
+        run: |
+          awk -v new_ver="$RELEASE_TAG" -v changes="$COMMIT_MESSAGES" \
+            '{ gsub(/RELEASE_TAG/, new_ver); gsub(/CHANGE_LOG/, changes); print }' \
+            ./.github/release_message.md > release.md
+        env:
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+          COMMIT_MESSAGES: ${{ env.COMMIT_MESSAGES }}
+
+      - name: Package release artifact
+        if: steps.tag.outputs.exists == 'false'
+        run: |
+          mkdir -p release
+          tar -czf "release/${{ env.ARCHIVE }}" \
+            src \
+            config \
+            composer.json \
+            LICENSE \
+            README.md \
+            CHANGELOG.md
+
+      - name: Create GitHub release
+        if: steps.tag.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: ${{ env.RELEASE_TAG }}
+          files: release/${{ env.ARCHIVE }}
+          body_path: ./release.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip duplicate release
+        if: steps.tag.outputs.exists == 'true'
+        run: |
+          echo "No release was created because ${{ env.RELEASE_TAG }} already exists."
+          echo "Bump the \"version\" field in composer.json to publish a new release."

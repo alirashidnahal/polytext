@@ -1,0 +1,48 @@
+name: Fix Code Style with Pint
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - '.github/**'
+
+permissions:
+  contents: write
+
+jobs:
+  pint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, fileinfo, json, mbstring, zip
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run Pint
+        run: vendor/bin/pint
+
+      - name: Generate commit timestamp
+        run: echo "CURRENT_TIMESTAMP=$(TZ='Asia/Tehran' date +'%Y%m%d-%H%M')" >> "$GITHUB_ENV"
+
+      - name: Commit Pint changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Apply Pint code style fixes at ${{ env.CURRENT_TIMESTAMP }}"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          skip_dirty_check: false
