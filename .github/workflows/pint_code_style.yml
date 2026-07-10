@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -39,7 +39,7 @@ jobs:
         run: echo "CURRENT_TIMESTAMP=$(TZ='Asia/Tehran' date +'%Y%m%d-%H%M')" >> "$GITHUB_ENV"
 
       - name: Commit Pint changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Apply Pint code style fixes at ${{ env.CURRENT_TIMESTAMP }}"
           commit_user_name: "github-actions[bot]"
