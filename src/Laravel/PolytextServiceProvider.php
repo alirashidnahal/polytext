@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Alirashidnahal\Polytext\Laravel;
 
+use Alirashidnahal\Polytext\Contracts\FormatDriver;
 use Alirashidnahal\Polytext\Polytext;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,8 +18,8 @@ final class PolytextServiceProvider extends ServiceProvider
             $polytext = new Polytext;
 
             foreach ((array) config('polytext.drivers', []) as $driverClass) {
-                if (is_string($driverClass) && is_subclass_of($driverClass, \Alirashidnahal\Polytext\Contracts\FormatDriver::class)) {
-                    /** @var \Alirashidnahal\Polytext\Contracts\FormatDriver $driver */
+                if (is_string($driverClass) && is_subclass_of($driverClass, FormatDriver::class)) {
+                    /** @var FormatDriver $driver */
                     $driver = new $driverClass;
                     $polytext->registerDriver($driver);
                 }
