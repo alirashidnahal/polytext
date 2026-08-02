@@ -37,8 +37,8 @@
     },
     "require-dev": {
         "illuminate/support": "^13.0",
-        "laravel/pint": "^1.29",
-        "phpstan/phpstan": "^2.1",
+        "laravel/pint": "^1.30",
+        "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpunit/phpunit": "^12.0"
     },
