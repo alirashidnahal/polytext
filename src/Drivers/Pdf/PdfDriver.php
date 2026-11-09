@@ -16,6 +16,7 @@ use Dompdf\Dompdf;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use Smalot\PdfParser\Parser;
+use Throwable;
 
 final class PdfDriver extends AbstractDriver
 {
@@ -39,7 +40,7 @@ final class PdfDriver extends AbstractDriver
             $parser = new Parser;
             $pdf = $parser->parseFile($path);
             $text = trim($pdf->getText());
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to read PDF document: '.$throwable->getMessage(), previous: $throwable);
         }
 
@@ -52,7 +53,7 @@ final class PdfDriver extends AbstractDriver
 
         foreach ($paragraphs as $index => $paragraph) {
             $nodes->add(new TextNode(
-                id: "paragraph:{$index}",
+                id: "paragraph:$index",
                 text: $paragraph,
                 context: ['index' => $index],
             ));
@@ -126,7 +127,7 @@ final class PdfDriver extends AbstractDriver
         try {
             IOFactory::createWriter($phpWord, 'Word2007')->save($outputPath);
             $target->write((string) file_get_contents($outputPath));
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to write DOCX output: '.$throwable->getMessage(), previous: $throwable);
         } finally {
             if (is_file($outputPath)) {

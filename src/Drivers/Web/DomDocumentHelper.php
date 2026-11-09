@@ -53,7 +53,7 @@ final class DomDocumentHelper
                 }
 
                 if (trim($node->nodeValue ?? '') !== '') {
-                    $id = "node:{$index}";
+                    $id = "node:$index";
                     $nodes->add(new TextNode($id, $node->nodeValue ?? '', ['dom_index' => $index]));
                     $nodeMap[$id] = $node;
                     $index++;

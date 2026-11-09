@@ -40,7 +40,7 @@ abstract class AbstractSubtitleDriver extends AbstractDriver
             }
 
             $nodes->add(new TextNode(
-                id: "cue:{$index}",
+                id: "cue:$index",
                 text: $block['text'],
                 context: ['block_index' => $index],
             ));

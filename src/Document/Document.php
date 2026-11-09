@@ -9,6 +9,7 @@ use Alirashidnahal\Polytext\Node\NodeCollection;
 use Alirashidnahal\Polytext\Node\TextNode;
 use Alirashidnahal\Polytext\Support\FileInfo;
 use Alirashidnahal\Polytext\Support\Target;
+use RuntimeException;
 
 final class Document
 {
@@ -111,7 +112,7 @@ final class Document
         $stream = fopen('php://temp', 'r+');
 
         if ($stream === false) {
-            throw new \RuntimeException('Unable to open temporary stream.');
+            throw new RuntimeException('Unable to open temporary stream.');
         }
 
         $this->driver->write($this, Target::toStream($stream));

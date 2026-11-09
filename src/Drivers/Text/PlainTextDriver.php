@@ -37,7 +37,7 @@ final class PlainTextDriver extends AbstractDriver
 
         foreach ($lines as $index => $line) {
             $nodes->add(new TextNode(
-                id: "line:{$index}",
+                id: "line:$index",
                 text: $line,
                 context: ['index' => $index, 'line_ending' => $lineEnding],
             ));

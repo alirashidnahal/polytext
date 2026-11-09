@@ -14,6 +14,7 @@ use Alirashidnahal\Polytext\Support\FileInfo;
 use Alirashidnahal\Polytext\Support\Source;
 use Alirashidnahal\Polytext\Support\Target;
 use Symfony\Component\Yaml\Yaml;
+use Throwable;
 
 final class YamlDriver extends AbstractDriver
 {
@@ -36,7 +37,7 @@ final class YamlDriver extends AbstractDriver
 
         try {
             $data = Yaml::parse($content);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Invalid YAML document: '.$throwable->getMessage(), previous: $throwable);
         }
 

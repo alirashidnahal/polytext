@@ -35,7 +35,7 @@ final class VttDriver extends AbstractSubtitleDriver
             }
 
             $nodes->add(new TextNode(
-                id: "cue:{$index}",
+                id: "cue:$index",
                 text: $block['text'],
                 context: ['block_index' => $index],
             ));
@@ -109,7 +109,6 @@ final class VttDriver extends AbstractSubtitleDriver
             if ($current['timing'] !== null) {
                 $current['dialogue_lines'][] = $line;
 
-                continue;
             }
         }
 
@@ -155,7 +154,7 @@ final class VttDriver extends AbstractSubtitleDriver
 
             $timing = (string) ($block['timing'] ?? '');
             $settings = $block['settings'] ?? null;
-            $parts[] = $settings ? "{$timing} {$settings}" : $timing;
+            $parts[] = $settings ? "$timing $settings" : $timing;
             $parts[] = (string) ($block['text'] ?? '');
             $parts[] = '';
         }

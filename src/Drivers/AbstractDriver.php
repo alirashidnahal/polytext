@@ -59,7 +59,7 @@ abstract class AbstractDriver implements FormatDriver
     {
         if (! class_exists($class)) {
             throw new MissingDependencyException(
-                "Missing dependency [{$package}]. Install it with: composer require {$package}"
+                "Missing dependency [$package]. Install it with: composer require $package"
             );
         }
     }
