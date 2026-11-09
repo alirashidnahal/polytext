@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-11-09
+
+### Changed
+
+- Raised `phpoffice/phpspreadsheet` to `^5.10` so Composer can install a release that is not blocked by Packagist security advisories on the 4.x line.
+- Raised `phpoffice/phppresentation` to `dev-master` (aliased as `1.3.0`) because the latest stable 1.2.0 release still requires PhpSpreadsheet 4.x and cannot be installed together with 5.10+.
+- Updated other production and development Composer constraints (`league/csv` `^9.27`, `phpoffice/phpword` `^1.4`, `smalot/pdfparser` `^2.13`, Pint, PHPStan) and refreshed `composer.lock`.
+- Switched CSV read/write to `League\Csv` `fromString()` after `createFromString()` was deprecated in 9.27.
+
+### Removed
+
+- Support for PhpSpreadsheet 4.x as a required dependency of this library.
+
 ## [1.0.0] - 2026-07-10
 
 ### Added
