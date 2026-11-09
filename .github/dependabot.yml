@@ -1,7 +1,7 @@
 version: 2
 
 updates:
-  # Composer / PHP dependencies
+  # Composer / PHP dependencies (security PRs are opened independently of this cadence)
   - package-ecosystem: composer
     directory: /
     schedule:

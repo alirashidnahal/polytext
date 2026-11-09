@@ -11,7 +11,7 @@ composer require alirashidnahal/polytext:RELEASE_TAG
 ```
 
 The attached archive contains the library sources (`src/`, `config/`, `composer.json`,
-`LICENSE`, `README.md`, `CHANGELOG.md`) for offline/manual installation.
+`composer.lock`, `VERSION`, `LICENSE`, `README.md`, `CHANGELOG.md`) for offline/manual installation.
 
 #### To report issues or provide suggestions:
 
