@@ -55,7 +55,7 @@ final class Target
             }
 
             if (file_put_contents($this->path, $contents) === false) {
-                throw new CorruptFileException("Unable to write target file: {$this->path}");
+                throw new CorruptFileException("Unable to write target file: $this->path");
             }
 
             return;

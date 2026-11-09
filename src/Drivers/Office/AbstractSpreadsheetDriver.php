@@ -14,6 +14,7 @@ use Alirashidnahal\Polytext\Support\Source;
 use Alirashidnahal\Polytext\Support\Target;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Throwable;
 
 abstract class AbstractSpreadsheetDriver extends AbstractDriver
 {
@@ -35,7 +36,7 @@ abstract class AbstractSpreadsheetDriver extends AbstractDriver
 
         try {
             $spreadsheet = IOFactory::load($path);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to read spreadsheet: '.$throwable->getMessage(), previous: $throwable);
         }
 
@@ -56,7 +57,7 @@ abstract class AbstractSpreadsheetDriver extends AbstractDriver
                     }
 
                     $coordinate = $cell->getCoordinate();
-                    $id = "cell:{$sheetIndex}:{$coordinate}";
+                    $id = "cell:$sheetIndex:$coordinate";
                     $nodes->add(new TextNode($id, $value, [
                         'sheet' => $sheetIndex,
                         'coordinate' => $coordinate,
@@ -107,7 +108,7 @@ abstract class AbstractSpreadsheetDriver extends AbstractDriver
         try {
             IOFactory::createWriter($spreadsheet, $this->writerType())->save($outputPath);
             $target->write((string) file_get_contents($outputPath));
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to write spreadsheet: '.$throwable->getMessage(), previous: $throwable);
         } finally {
             if (is_file($outputPath)) {
