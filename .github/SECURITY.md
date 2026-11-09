@@ -8,12 +8,15 @@ Only the latest major version receives security fixes.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.x     | :white_check_mark: |
+| 2.x     | :white_check_mark: |
+| 1.x     | :x:                |
 | < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability within Polytext, please send an email to Ali Rashidnahal at [polytext@alirashidnahal.com](mailto:polytext@alirashidnahal.com). All security vulnerabilities will be promptly addressed.
+
+Do not ignore Packagist/Composer security advisories (`policy.advisories.ignore` or `policy.advisories.block: false`) to install this library. Bump Polytext to a release whose constraints resolve to patched dependencies instead.
 
 Please include as much detail as possible:
 

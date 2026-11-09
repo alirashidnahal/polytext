@@ -72,7 +72,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: dom, fileinfo, json, mbstring, zip
+          extensions: dom, fileinfo, json, libxml, mbstring, zip
           coverage: none
 
       - name: Validate composer.json
@@ -81,7 +81,15 @@ jobs:
 
       - name: Install dependencies
         if: steps.tag.outputs.exists == 'false'
-        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+        run: composer install --prefer-dist --no-progress
+
+      - name: Audit locked dependencies
+        if: steps.tag.outputs.exists == 'false'
+        run: composer audit --locked --format=plain
+
+      - name: Run tests
+        if: steps.tag.outputs.exists == 'false'
+        run: vendor/bin/phpunit --colors=always
 
       - name: Prepare release message
         if: steps.tag.outputs.exists == 'false'
@@ -101,6 +109,8 @@ jobs:
             src \
             config \
             composer.json \
+            composer.lock \
+            VERSION \
             LICENSE \
             README.md \
             CHANGELOG.md

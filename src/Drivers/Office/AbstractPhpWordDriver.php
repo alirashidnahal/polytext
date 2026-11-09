@@ -17,6 +17,7 @@ use PhpOffice\PhpWord\Element\Text;
 use PhpOffice\PhpWord\Element\TextRun;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
+use Throwable;
 
 abstract class AbstractPhpWordDriver extends AbstractDriver
 {
@@ -38,7 +39,7 @@ abstract class AbstractPhpWordDriver extends AbstractDriver
 
         try {
             $phpWord = IOFactory::load($path, $this->readerType());
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to read Word document: '.$throwable->getMessage(), previous: $throwable);
         }
 
@@ -90,7 +91,7 @@ abstract class AbstractPhpWordDriver extends AbstractDriver
         try {
             IOFactory::createWriter($phpWord, $this->writerType())->save($outputPath);
             $target->write((string) file_get_contents($outputPath));
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to write Word document: '.$throwable->getMessage(), previous: $throwable);
         } finally {
             if (is_file($outputPath)) {
@@ -111,7 +112,7 @@ abstract class AbstractPhpWordDriver extends AbstractDriver
                 return;
             }
 
-            $id = "word:{$index}";
+            $id = "word:$index";
             $nodes->add(new TextNode($id, $text, ['index' => $index]));
             $textMap[$id] = $element;
             $index++;

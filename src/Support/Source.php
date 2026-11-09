@@ -6,20 +6,20 @@ namespace Alirashidnahal\Polytext\Support;
 
 use Alirashidnahal\Polytext\Exceptions\CorruptFileException;
 
-final class Source
+final readonly class Source
 {
     private function __construct(
-        public readonly ?string $path,
-        public readonly ?string $content,
+        public ?string $path,
+        public ?string $content,
         /** @var resource|null */
-        public readonly mixed $stream,
-        public readonly ?FileInfo $fileInfo,
+        public mixed $stream,
+        public ?FileInfo $fileInfo,
     ) {}
 
     public static function fromPath(string $path): self
     {
         if (! is_readable($path)) {
-            throw new CorruptFileException("Source file is not readable: {$path}");
+            throw new CorruptFileException("Source file is not readable: $path");
         }
 
         return new self(
@@ -71,7 +71,7 @@ final class Source
             $contents = file_get_contents($this->path);
 
             if ($contents === false) {
-                throw new CorruptFileException("Unable to read source file: {$this->path}");
+                throw new CorruptFileException("Unable to read source file: $this->path");
             }
 
             return $contents;

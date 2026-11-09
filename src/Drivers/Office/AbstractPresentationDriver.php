@@ -15,6 +15,7 @@ use Alirashidnahal\Polytext\Support\Target;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\Shape\RichText;
+use Throwable;
 
 abstract class AbstractPresentationDriver extends AbstractDriver
 {
@@ -36,7 +37,7 @@ abstract class AbstractPresentationDriver extends AbstractDriver
 
         try {
             $presentation = IOFactory::load($path);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to read presentation: '.$throwable->getMessage(), previous: $throwable);
         }
 
@@ -61,7 +62,7 @@ abstract class AbstractPresentationDriver extends AbstractDriver
                     continue;
                 }
 
-                $id = "slide:{$slideIndex}:{$shapeIndex}";
+                $id = "slide:$slideIndex:$shapeIndex";
                 $nodes->add(new TextNode($id, $text, [
                     'slide' => $slideIndex,
                     'shape' => $shapeIndex,
@@ -114,7 +115,7 @@ abstract class AbstractPresentationDriver extends AbstractDriver
         try {
             IOFactory::createWriter($presentation, $this->writerType())->save($outputPath);
             $target->write((string) file_get_contents($outputPath));
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw new CorruptFileException('Unable to write presentation: '.$throwable->getMessage(), previous: $throwable);
         } finally {
             if (is_file($outputPath)) {

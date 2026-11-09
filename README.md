@@ -6,6 +6,7 @@ Framework-agnostic PHP library for parsing, reading, and writing text across man
 
 - PHP 8.3+
 - Extensions: `dom`, `fileinfo`, `json`, `mbstring`, `zip`
+- PhpSpreadsheet 5.10+ (4.x is rejected by Composer security advisories)
 
 ## Installation
 

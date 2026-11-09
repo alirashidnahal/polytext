@@ -57,7 +57,7 @@ final class DriverRegistry
 
         $extension = $file->extension ?? 'unknown';
 
-        throw new DriverNotFoundException("No driver found for format: {$extension}");
+        throw new DriverNotFoundException("No driver found for format: $extension");
     }
 
     public function supports(FileInfo $file): bool
@@ -74,16 +74,16 @@ final class DriverRegistry
     public function resolveByName(string $name): FormatDriver
     {
         if (! isset($this->drivers[$name])) {
-            throw new DriverNotFoundException("Driver not registered: {$name}");
+            throw new DriverNotFoundException("Driver not registered: $name");
         }
 
         return $this->drivers[$name];
     }
 }
 
-final class Polytext
+final readonly class Polytext
 {
-    private readonly DriverRegistry $registry;
+    private DriverRegistry $registry;
 
     /**
      * @param  list<FormatDriver>|null  $drivers

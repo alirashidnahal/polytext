@@ -12,6 +12,9 @@ use Alirashidnahal\Polytext\Node\TextNode;
 use Alirashidnahal\Polytext\Support\FileInfo;
 use Alirashidnahal\Polytext\Support\Source;
 use Alirashidnahal\Polytext\Support\Target;
+use League\Csv\CannotInsertRecord;
+use League\Csv\Exception;
+use League\Csv\InvalidArgument;
 use League\Csv\Reader;
 use League\Csv\Writer;
 
@@ -28,12 +31,15 @@ final class CsvDriver extends AbstractDriver
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function read(Source $source): Document
     {
         $this->ensureClassExists(Reader::class, 'league/csv');
 
         $content = $this->normalizeToUtf8($source->readContents());
-        $reader = Reader::createFromString($content);
+        $reader = Reader::fromString($content);
         $reader->setHeaderOffset(null);
 
         $nodes = new NodeCollection;
@@ -50,7 +56,7 @@ final class CsvDriver extends AbstractDriver
                 }
 
                 $nodes->add(new TextNode(
-                    id: "cell:{$rowIndex}:{$columnIndex}",
+                    id: "cell:$rowIndex:$columnIndex",
                     text: $cell,
                     context: ['row' => $rowIndex, 'column' => $columnIndex],
                 ));
@@ -72,6 +78,11 @@ final class CsvDriver extends AbstractDriver
         );
     }
 
+    /**
+     * @throws InvalidArgument
+     * @throws CannotInsertRecord
+     * @throws Exception
+     */
     public function write(Document $document, Target $target): void
     {
         $this->ensureClassExists(Writer::class, 'league/csv');
@@ -88,7 +99,7 @@ final class CsvDriver extends AbstractDriver
             }
         }
 
-        $writer = Writer::createFromString();
+        $writer = Writer::fromString();
         $writer->setDelimiter((string) ($document->metadata()['delimiter'] ?? ','));
         $writer->setEnclosure((string) ($document->metadata()['enclosure'] ?? '"'));
         $writer->setEscape((string) ($document->metadata()['escape'] ?? '\\'));

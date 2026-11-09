@@ -30,7 +30,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: dom, fileinfo, json, mbstring, zip
+          extensions: dom, fileinfo, json, libxml, mbstring, zip
           coverage: none
 
       - name: Install dependencies

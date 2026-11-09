@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Alirashidnahal\Polytext\Support;
 
-final class FileInfo
+final readonly class FileInfo
 {
     /**
      * @param  list<non-empty-string>  $extensions
      * @param  list<non-empty-string>  $mimeTypes
      */
     public function __construct(
-        public readonly ?string $path = null,
-        public readonly ?string $extension = null,
-        public readonly ?string $mimeType = null,
-        public readonly array $extensions = [],
-        public readonly array $mimeTypes = [],
+        public ?string $path = null,
+        public ?string $extension = null,
+        public ?string $mimeType = null,
+        public array $extensions = [],
+        public array $mimeTypes = [],
     ) {}
 
     public static function fromPath(string $path): self
