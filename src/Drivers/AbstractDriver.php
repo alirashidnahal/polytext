@@ -55,11 +55,13 @@ abstract class AbstractDriver implements FormatDriver
         return false;
     }
 
-    protected function ensureClassExists(string $class, string $package): void
+    protected function ensureClassExists(string $class, string $package, ?string $constraint = null): void
     {
         if (! class_exists($class)) {
+            $require = $constraint !== null ? "{$package}:{$constraint}" : $package;
+
             throw new MissingDependencyException(
-                "Missing dependency [$package]. Install it with: composer require $package"
+                "Missing dependency [$package]. Install it with: composer require $require"
             );
         }
     }

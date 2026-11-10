@@ -14,6 +14,12 @@ Framework-agnostic PHP library for parsing, reading, and writing text across man
 composer require alirashidnahal/polytext
 ```
 
+PPT/PPTX need `phpoffice/phppresentation`. The latest stable release (1.2.0) cannot be installed next to PhpSpreadsheet 5. Until PHPPresentation 1.3.0 is tagged, add it only if you need those formats:
+
+```bash
+composer require phpoffice/phppresentation:dev-master
+```
+
 ## Quick Start
 
 ```php
