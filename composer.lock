@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e2a0b80bbcf9d5c2e609a10ee00d881",
+    "content-hash": "2f7c3c755efb410ed65744729d1846a0",
     "packages": [
         {
             "name": "composer/pcre",
@@ -586,103 +586,6 @@
             "time": "2026-10-25T08:57:58+00:00"
         },
         {
-            "name": "pclzip/pclzip",
-            "version": "2.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ivanlanin/pclzip.git",
-                "reference": "19dd1de9d3f5fc4d7d70175b4c344dee329f45fd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ivanlanin/pclzip/zipball/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd",
-                "reference": "19dd1de9d3f5fc4d7d70175b4c344dee329f45fd",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "pclzip.lib.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Vincent Blavet"
-                }
-            ],
-            "description": "A PHP library that offers compression and extraction functions for Zip formatted archives",
-            "homepage": "http://www.phpconcept.net/pclzip",
-            "keywords": [
-                "php",
-                "zip"
-            ],
-            "support": {
-                "issues": "https://github.com/ivanlanin/pclzip/issues",
-                "source": "https://github.com/ivanlanin/pclzip/tree/master"
-            },
-            "time": "2014-06-05T11:42:24+00:00"
-        },
-        {
-            "name": "phpoffice/common",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/Common.git",
-                "reference": "0982b6b36d9ebf0cae8d9214d345b8e23b529feb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/Common/zipball/0982b6b36d9ebf0cae8d9214d345b8e23b529feb",
-                "reference": "0982b6b36d9ebf0cae8d9214d345b8e23b529feb",
-                "shasum": ""
-            },
-            "require": {
-                "pclzip/pclzip": "^2.8",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "phpmd/phpmd": "2.*",
-                "phpstan/phpstan": "^0.12.88 || ^1.0.0 || ^2.0.0",
-                "phpunit/phpunit": ">=7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpOffice\\Common\\": "src/Common/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Baker"
-                },
-                {
-                    "name": "Franck Lefevre",
-                    "homepage": "http://rootslabs.net"
-                }
-            ],
-            "description": "PHPOffice Common",
-            "homepage": "http://phpoffice.github.io",
-            "keywords": [
-                "common",
-                "component",
-                "office",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/PHPOffice/Common/issues",
-                "source": "https://github.com/PHPOffice/Common/tree/1.1.0"
-            },
-            "time": "2026-09-05T19:14:14+00:00"
-        },
-        {
             "name": "phpoffice/math",
             "version": "0.3.0",
             "source": {
@@ -733,79 +636,6 @@
                 "source": "https://github.com/PHPOffice/Math/tree/0.3.0"
             },
             "time": "2025-05-29T08:31:49+00:00"
-        },
-        {
-            "name": "phpoffice/phppresentation",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/PHPPresentation.git",
-                "reference": "6192084e7da02a841e721081f9c94c0a6d30e3d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPPresentation/zipball/6192084e7da02a841e721081f9c94c0a6d30e3d1",
-                "reference": "6192084e7da02a841e721081f9c94c0a6d30e3d1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-xml": "*",
-                "ext-zip": "*",
-                "php": "^7.4|^8.0",
-                "phpoffice/common": "^1",
-                "phpoffice/phpspreadsheet": "^1.9 || ^2.0 || ^3.0 || ^4.0 || ^5.0"
-            },
-            "require-dev": {
-                "dompdf/dompdf": "^3.1",
-                "phpmd/phpmd": "2.*",
-                "phpoffice/wmf": "^0.2.1",
-                "phpstan/phpstan": "^2.2,!=2.2.11",
-                "phpunit/phpunit": ">=7.0"
-            },
-            "suggest": {
-                "ext-gd": "Required to add images",
-                "phpoffice/wmf": "Allows adding WMF, EMF and EMF+ images (requires ext-gd)"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpOffice\\PhpPresentation\\": "src/PhpPresentation/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Baker"
-                },
-                {
-                    "name": "Franck Lefevre",
-                    "homepage": "http://rootslabs.net"
-                },
-                {
-                    "name": "Ivan Lanin",
-                    "homepage": "http://ivan.lanin.org"
-                }
-            ],
-            "description": "PHPPresentation - Read, Create and Write Presentations documents in PHP",
-            "homepage": "http://phpoffice.github.io",
-            "keywords": [
-                "LibreOffice",
-                "PowerPoint",
-                "odp",
-                "php",
-                "ppt",
-                "pptx",
-                "presentations"
-            ],
-            "support": {
-                "issues": "https://github.com/PHPOffice/PHPPresentation/issues",
-                "source": "https://github.com/PHPOffice/PHPPresentation/tree/master"
-            },
-            "time": "2026-11-09T05:53:24+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -2365,6 +2195,47 @@
             "time": "2026-09-13T18:51:52+00:00"
         },
         {
+            "name": "pclzip/pclzip",
+            "version": "2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ivanlanin/pclzip.git",
+                "reference": "19dd1de9d3f5fc4d7d70175b4c344dee329f45fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ivanlanin/pclzip/zipball/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd",
+                "reference": "19dd1de9d3f5fc4d7d70175b4c344dee329f45fd",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "pclzip.lib.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Blavet"
+                }
+            ],
+            "description": "A PHP library that offers compression and extraction functions for Zip formatted archives",
+            "homepage": "http://www.phpconcept.net/pclzip",
+            "keywords": [
+                "php",
+                "zip"
+            ],
+            "support": {
+                "issues": "https://github.com/ivanlanin/pclzip/issues",
+                "source": "https://github.com/ivanlanin/pclzip/tree/master"
+            },
+            "time": "2014-06-05T11:42:24+00:00"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "2.0.4",
             "source": {
@@ -2483,6 +2354,135 @@
             "time": "2022-02-21T01:04:05+00:00"
         },
         {
+            "name": "phpoffice/common",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/Common.git",
+                "reference": "0982b6b36d9ebf0cae8d9214d345b8e23b529feb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/Common/zipball/0982b6b36d9ebf0cae8d9214d345b8e23b529feb",
+                "reference": "0982b6b36d9ebf0cae8d9214d345b8e23b529feb",
+                "shasum": ""
+            },
+            "require": {
+                "pclzip/pclzip": "^2.8",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "2.*",
+                "phpstan/phpstan": "^0.12.88 || ^1.0.0 || ^2.0.0",
+                "phpunit/phpunit": ">=7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpOffice\\Common\\": "src/Common/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://rootslabs.net"
+                }
+            ],
+            "description": "PHPOffice Common",
+            "homepage": "http://phpoffice.github.io",
+            "keywords": [
+                "common",
+                "component",
+                "office",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/PHPOffice/Common/issues",
+                "source": "https://github.com/PHPOffice/Common/tree/1.1.0"
+            },
+            "time": "2026-09-05T19:14:14+00:00"
+        },
+        {
+            "name": "phpoffice/phppresentation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPPresentation.git",
+                "reference": "6192084e7da02a841e721081f9c94c0a6d30e3d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPPresentation/zipball/6192084e7da02a841e721081f9c94c0a6d30e3d1",
+                "reference": "6192084e7da02a841e721081f9c94c0a6d30e3d1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-zip": "*",
+                "php": "^7.4|^8.0",
+                "phpoffice/common": "^1",
+                "phpoffice/phpspreadsheet": "^1.9 || ^2.0 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "dompdf/dompdf": "^3.1",
+                "phpmd/phpmd": "2.*",
+                "phpoffice/wmf": "^0.2.1",
+                "phpstan/phpstan": "^2.2,!=2.2.11",
+                "phpunit/phpunit": ">=7.0"
+            },
+            "suggest": {
+                "ext-gd": "Required to add images",
+                "phpoffice/wmf": "Allows adding WMF, EMF and EMF+ images (requires ext-gd)"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpOffice\\PhpPresentation\\": "src/PhpPresentation/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://rootslabs.net"
+                },
+                {
+                    "name": "Ivan Lanin",
+                    "homepage": "http://ivan.lanin.org"
+                }
+            ],
+            "description": "PHPPresentation - Read, Create and Write Presentations documents in PHP",
+            "homepage": "http://phpoffice.github.io",
+            "keywords": [
+                "LibreOffice",
+                "PowerPoint",
+                "odp",
+                "php",
+                "ppt",
+                "pptx",
+                "presentations"
+            ],
+            "support": {
+                "issues": "https://github.com/PHPOffice/PHPPresentation/issues",
+                "source": "https://github.com/PHPOffice/PHPPresentation/tree/master"
+            },
+            "time": "2026-11-09T05:53:24+00:00"
+        },
+        {
             "name": "phpstan/phpstan",
             "version": "2.3.5",
             "dist": {
@@ -2544,8 +2544,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-03T12:14:22+00:00",
-            "published-time": "2026-11-03T12:14:36+00:00"
+            "time": "2026-11-03T12:14:22+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -4953,5 +4952,5 @@
     "platform-overrides": {
         "php": "8.3.0"
     },
-    "plugin-api-version": "2.11.0"
+    "plugin-api-version": "2.9.0"
 }

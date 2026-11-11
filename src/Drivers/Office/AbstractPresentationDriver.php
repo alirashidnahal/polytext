@@ -31,7 +31,7 @@ abstract class AbstractPresentationDriver extends AbstractDriver
 
     public function read(Source $source): Document
     {
-        $this->ensureClassExists(PhpPresentation::class, 'phpoffice/phppresentation');
+        $this->ensureClassExists(PhpPresentation::class, 'phpoffice/phppresentation', 'dev-master');
 
         $path = $source->createTempPath();
 
@@ -82,7 +82,7 @@ abstract class AbstractPresentationDriver extends AbstractDriver
 
     public function write(Document $document, Target $target): void
     {
-        $this->ensureClassExists(PhpPresentation::class, 'phpoffice/phppresentation');
+        $this->ensureClassExists(PhpPresentation::class, 'phpoffice/phppresentation', 'dev-master');
 
         /** @var array<string, RichText> $shapeMap */
         $shapeMap = $document->state()['shape_map'] ?? [];
